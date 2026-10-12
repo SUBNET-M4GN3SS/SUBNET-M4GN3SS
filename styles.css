@@ -1,0 +1,124 @@
+css
+:root {
+    --bg-color: #0D0D0F;
+    --surface-color: #161619;
+    --accent-color: #BB86FC;
+    --accent-color2: #35FF3C;
+    --accent-color3: #D8D400;
+    --accent-color4: #E15B5B;
+    --accent-color5: #4682B8;
+    --text-color: #D0D0D0;
+    --text-muted: #777780;
+    --border-color: #522166;
+}
+
+/* Overall page */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Main terminal window */
+.terminal {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 24px #00000080;
+}
+
+/* Header and branding */
+.terminal-header {
+    background: #111113;
+    border-bottom: 1px solid #33203B;
+}
+
+.brand {
+    color: var(--text-color);
+}
+
+.brand-symbol,
+.accent {
+    color: var(--accent-color);
+}
+
+/* System information */
+.system-bar {
+    background: #111113;
+    color: var(--accent-color5);
+    border-bottom: 1px solid #29242D;
+}
+
+.system-status {
+    color: var(--accent-color2);
+}
+
+.status-light {
+    background: var(--accent-color2);
+    box-shadow: 0 0 5px #35FF3C66;
+}
+
+/* Terminal text */
+.terminal-output {
+    color: var(--text-color);
+}
+
+.ascii-logo {
+    color: var(--accent-color);
+    text-shadow: 0 0 8px #BB86FC22;
+}
+
+.dim,
+.muted {
+    color: var(--text-muted);
+}
+
+/* Semantic colors */
+.success {
+    color: var(--accent-color2);
+}
+
+.warning,
+.directory-name,
+.file-icon {
+    color: var(--accent-color3);
+}
+
+.error {
+    color: var(--accent-color4);
+}
+
+.file-name {
+    color: var(--text-color);
+}
+
+/* Command input */
+.command-line {
+    background: #111113;
+    border-top: 1px solid var(--border-color);
+}
+
+.prompt {
+    color: var(--accent-color);
+}
+
+#command-input {
+    background: transparent;
+    color: var(--accent-color2);
+    caret-color: var(--accent-color2);
+}
+
+/* Footer */
+.terminal-footer {
+    background: #111113;
+    color: var(--text-muted);
+    border-top: 1px solid #29242D;
+}
+
+/* Keep the terminal readable */
+#command-input:focus {
+    outline: none;
+}
+
+::selection {
+    background: #BB86FC44;
+    color: #FFFFFF;
+}
