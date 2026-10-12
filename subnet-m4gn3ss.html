@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0D0D0F">
+    <meta name="description" content="SUBNET M4GN3SS — Independent network node for fiction, interactive software, and transmissions.">
+
+    <title>SUBNET M4GN3SS // NODE 001</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+
+    <style>
+        /* Page layout */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            background: #0D0D0F;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 32px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0D0D0F;
+            color: #D0D0D0;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+        }
+
+        /* Terminal window */
+        .terminal {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #161619;
+            border: 1px solid #522166;
+            box-shadow: 0 0 30px #00000080;
+        }
+
+        /* Header */
+        .terminal-header {
+            min-height: 60px;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            background: #111113;
+            border-bottom: 1px solid #33203B;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #D0D0D0;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .brand-symbol,
+        .accent {
+            color: #8540d9;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #35FF3C;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .status-light {
+            width: 7px;
+            height: 7px;
+            flex: 0 0 7px;
+            border-radius: 50%;
+            background: #35FF3C;
+            box-shadow: 0 0 7px #35FF3C66;
+        }
+
+        /* System information bar */
+        .system-bar {
+            min-height: 36px;
+            padding: 10px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            background: #111113;
+            border-bottom: 1px solid #29242D;
+            color: #4682B8;
+            font-size: 11px;
+        }
+
+        /* Industrial hazard stripe */
+        .hazard-divider {
+            height: 6px;
+            flex: 0 0 6px;
+            background: repeating-linear-gradient(
+                45deg,
+                #C9B800 0px,
+                #C9B800 8px,
+                #171719 8px,
+                #171719 16px
+            );
+        }
+
+        /* Terminal display */
+        .terminal-output {
+            flex: 1;
+            min-height: 380px;
+            padding: 28px;
+            overflow-wrap: anywhere;
+            background: #161619;
+            color: #D0D0D0;
+            line-height: 1.8;
+        }
+
+        .terminal-output p {
+            margin: 0 0 8px;
+        }
+
+        .dim,
+        .muted {
+            color: #777780;
+        }
+
+        .success {
+            color: #35FF3C;
+        }
+
+        .warning,
+        .directory-name,
+        .file-icon {
+            color: #D8D400;
+        }
+
+        .error {
+            color: #E15B5B;
+        }
+
+        .file-name {
+            color: #D0D0D0;
+        }
+
+        /* Command input */
+        .command-line {
+            min-height: 58px;
+            padding: 14px 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #111113;
+            border-top: 1px solid #522166;
+        }
+
+        .prompt {
+            flex: 0 0 auto;
+            color: #BB86FC;
+            white-space: nowrap;
+        }
+
+        #command-input {
+            width: 100%;
+            min-width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #35FF3C;
+            caret-color: #35FF3C;
+            font: inherit;
+        }
+
+        /* Footer */
+        .terminal-footer {
+            min-height: 36px;
+            padding: 10px 22px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+            background: #111113;
+            border-top: 1px solid #29242D;
+            color: #777780;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        ::selection {
+            background: #BB86FC44;
+            color: #FFFFFF;
+        }
+
+        /* Small screens */
+        @media (max-width: 600px) {
+            body {
+                padding: 0;
+                align-items: stretch;
+            }
+
+            .terminal {
+                min-height: 100vh;
+                border-left: none;
+                border-right: none;
+            }
+
+            .terminal-header {
+                padding: 16px;
+            }
+
+            .brand {
+                font-size: 15px;
+                letter-spacing: 1px;
+            }
+
+            .system-bar {
+                padding: 10px 16px;
+                font-size: 10px;
+            }
+
+            .terminal-output {
+                padding: 22px 16px;
+            }
+
+            .command-line {
+                padding: 14px 16px;
+                gap: 8px;
+            }
+
+            .prompt {
+                font-size: 12px;
+            }
+
+            .terminal-footer {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="terminal">
+
+        <header class="terminal-header">
+            <div class="brand">
+                <span class="brand-symbol" aria-hidden="true">▣</span>
+                <span>SUBNET</span>
+                <span class="accent">M4GN3SS</span>
+            </div>
+
+            <div class="system-status">
+                <span class="status-light" aria-hidden="true"></span>
+                <span id="node-status">INITIALIZING</span>
+            </div>
+        </header>
+
+        <section class="system-bar" aria-label="System information">
+            <span>SYS://SUBNET-M4GN3SS</span>
+            <span id="clock">00:00:00</span>
+            <span id="access-status">BOOT SEQUENCE</span>
+        </section>
+
+        <div aria-hidden="true"></div>
+
+        <section
+            class="terminal-output"
+            id="terminal-output"
+            aria-label="Terminal output"
+            aria-live="polite"
+            aria-relevant="additions"
+        >
+            <p class="dim">SUBNET M4GN3SS // NODE 001</p>
+            <p class="dim">INDEPENDENT ARCHIVE TERMINAL</p>
+            <br>
+            <p class="success">CONNECTION ESTABLISHED.</p>
+            <p>Network node is operational.</p>
+            <p>Enter <span class="warning">help</span> to list available commands.</p>
+            <br>
+        </section>
+
+        <form
+            class="command-line"
+            id="command-form"
+            autocomplete="off"
+        >
+            <label class="prompt" id="prompt" for="command-input">guest@subnet:~$</label>
+
+            <input
+                type="text"
+                id="command-input"
+                name="command"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                autofocus
+                aria-label="Enter a terminal command"
+            >
+        </form>
+
+        <footer class="terminal-footer">
+            <span>NODE: SM-001</span>
+            <span>SECURITY: UNVERIFIED</span>
+            <span>© SUBNET M4GN3SS</span>
+        </footer>
+
+    </main>
+</body>
+</html>
