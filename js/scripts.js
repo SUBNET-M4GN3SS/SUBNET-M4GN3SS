@@ -21,9 +21,9 @@ const  commandAndDescriptionDict = {
 };
 
 const node1 = new Node("N1", "index.html", "active", ["N2", "N3"], []);
-const node2= new Node("N2", "/nodes/node2.html", "active", ["N1", "N4"], []);
-const node3 = new Node("N3", "/nodes/node3.html", "active", ["N1"], []);
-const node4 = new Node("N4", "/nodes/node4.html", "active", ["N2"], []);
+const node2= new Node("N2", "nodes/node2.html", "active", ["N1", "N4"], []);
+const node3 = new Node("N3", "nodes/node3.html", "active", ["N1"], []);
+const node4 = new Node("N4", "nodes/node4.html", "active", ["N2"], []);
 
 const nodes = {
     "N1": node1,
