@@ -180,7 +180,7 @@ async function bootTerminal() {
     await printBootMessage(dividerLine, "dim");
 
     await printBootMessage(
-        "TYPE 'scan' TO SCAN FOR CONNECTED NODES OR 'help' FOR A LIST OF COMMANDS",
+        "TYPE 'nodes' TO SCAN FOR CONNECTED NODES OR 'help' FOR A LIST OF COMMANDS",
         "dim"
     );
 
