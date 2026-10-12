@@ -2,6 +2,8 @@
 // SUBNET M4GN3SS // SYSTEM BOOT SEQUENCE
 // ========================================
 
+import { Node } from "./node";
+
 const commandForm = document.getElementById("command-form");
 const terminalOutput = document.getElementById("terminal-output");
 const commandInput = document.getElementById("command-input");
@@ -13,8 +15,9 @@ const dividerLine = "-".repeat(20);
 const  commandAndDescriptionDict = {
     "Nodes": "Identify connected nodes",
     "Navigate": "Navigate to a connected node",
-    "Open": "Open a file",
-    "Scan": "Scan the current node for files"
+    "Read": "Read a text file",
+    "Scan": "Scan the current node for files",
+    "Downlaod": "Download a file"
 };
 
 const network = {
@@ -23,6 +26,11 @@ const network = {
     N3: ["N1"],
     N4: ["N2"]
 };
+
+const node1 = new Node("N1", "nodes/index.html", "active", ["N2", "N3"], []);
+const node2= new Node("N2", "nodes/node2.html", "active", ["N1", "N4"], []);
+const node3 = new Node("N3", "nodes/node3.html", "active", ["N1"], []);
+const node4 = new Node("N4", "nodes/node4.html", "active", ["N2"], []);
 
 let currentNode = "N1";
 
