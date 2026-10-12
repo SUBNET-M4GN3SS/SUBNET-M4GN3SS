@@ -2,7 +2,7 @@
 // SUBNET M4GN3SS // SYSTEM BOOT SEQUENCE
 // ========================================
 
-import { Node } from "./node";
+import { Node } from "./node.js";
 
 const commandForm = document.getElementById("command-form");
 const terminalOutput = document.getElementById("terminal-output");
@@ -17,20 +17,20 @@ const  commandAndDescriptionDict = {
     "Navigate": "Navigate to a connected node",
     "Read": "Read a text file",
     "Scan": "Scan the current node for files",
-    "Downlaod": "Download a file"
+    "Download": "Download a file"
 };
 
-const network = {
-    N1: ["N2", "N3"],
-    N2: ["N1", "N4"],
-    N3: ["N1"],
-    N4: ["N2"]
-};
+const node1 = new Node("N1", "index.html", "active", ["N2", "N3"], []);
+const node2= new Node("N2", "/nodes/node2.html", "active", ["N1", "N4"], []);
+const node3 = new Node("N3", "/nodes/node3.html", "active", ["N1"], []);
+const node4 = new Node("N4", "/nodes/node4.html", "active", ["N2"], []);
 
-const node1 = new Node("N1", "nodes/index.html", "active", ["N2", "N3"], []);
-const node2= new Node("N2", "nodes/node2.html", "active", ["N1", "N4"], []);
-const node3 = new Node("N3", "nodes/node3.html", "active", ["N1"], []);
-const node4 = new Node("N4", "nodes/node4.html", "active", ["N2"], []);
+const nodes = {
+    "N1": node1,
+    "N2": node2,
+    "N3": node3,
+    "N4": node4
+};
 
 let currentNode = "N1";
 
@@ -41,9 +41,11 @@ commandForm.addEventListener("submit", async function(event) {
 
     const parts = input.trim().split(/\s+/);
     const command = parts[0].toLowerCase();
-    const argument = parts[1];
+    const argument = parts[1]?.toUpperCase();
 
     if(!command) return;
+
+    const connections = nodes[currentNode].connectedNodes;
 
     switch (command) {
         case "help":
@@ -62,11 +64,8 @@ commandForm.addEventListener("submit", async function(event) {
 
             break;
 
-        case "nodes":
-            //Find all available node connections
-            const connections = network[currentNode];
-
-            if(connections){
+        case "nodes":;
+            if(connections.length > 0){
                 terminalOutput.replaceChildren();
                 await printBootMessage("Connected Nodes", "accent");
                 await printBootMessage(dividerLine, "dim");
@@ -84,7 +83,25 @@ commandForm.addEventListener("submit", async function(event) {
             break;
 
         case "navigate":
-            //Navigate to a specified, connected node
+            //Check connectivity
+            if(!connections.includes(argument)){
+                await printBootMessage("Invalid destination", "warning");
+                return;
+            }
+
+            const target_node = nodes[argument];
+
+            if(!target_node){
+                await printBootMessage("Invalid destination", "warning");
+                return;
+            }
+
+            if(target_node.status === "active"){
+                navigateToNode(target_node);
+            } else {
+                await printBootMessage("No node connections found", "warning");
+                return;
+            }
             break;
 
         case "scan":
@@ -102,6 +119,10 @@ commandForm.addEventListener("submit", async function(event) {
     };
 
 });
+
+function navigateToNode(targetNode){
+    window.location.href = targetNode.page;
+}
 
 // Delay between boot messages
 function wait(ms) {
