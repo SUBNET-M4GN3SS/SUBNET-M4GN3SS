@@ -11,7 +11,7 @@ const clock = document.getElementById("clock");
 const dividerLine = "-".repeat(20);
 
 const  commandAndDescriptionDict = {
-    "Nodes": "Find connected nodes",
+    "Nodes": "Identify connected nodes",
     "Navigate": "Navigate to a connected node",
     "Open": "Open a file",
     "Scan": "Scan the current node for files"
@@ -180,7 +180,7 @@ async function bootTerminal() {
     await printBootMessage(dividerLine, "dim");
 
     await printBootMessage(
-        "TYPE 'nodes' TO SCAN FOR CONNECTED NODES OR 'help' FOR A LIST OF COMMANDS",
+        "TYPE 'nodes' TO IDENTIFY CONNECTED NODES OR 'help' FOR A LIST OF COMMANDS",
         "dim"
     );
 
