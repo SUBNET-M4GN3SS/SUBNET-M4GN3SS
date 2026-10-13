@@ -175,7 +175,13 @@ commandForm.addEventListener("submit", async function(event) {
 });
 
 function navigateToNode(targetNode){
-    window.location.href = targetNode.page;
+    if (currentNode === "N1") {
+        window.location.href = targetNode.page;
+    } else {
+        window.location.href = targetNode.name === "N1"
+            ? "../index.html"
+            : targetNode.page.split("/").pop();
+    }
 }
 
 // Delay between boot messages
@@ -231,35 +237,33 @@ async function bootTerminal() {
         "dim"
     );
 
-    await printBootMessage(
-        "POWERING SYSTEM................. OK",
-        "success"
-    );
+    if(currentNode === "N1"){
 
-    await printBootMessage(
-        "INITIALIZING SUBSYSTEMS......... OK",
-        "success"
-    );
+        await printBootMessage(
+            "REMOTE CONNECTION............... ESTABLISHED",
+            "success"
+        );
 
-    await printBootMessage(
-        "LOADING ARCHIVE INDEX........... OK",
-        "success"
-    );
+        await printBootMessage(
+            "INITIALIZING SUBSYSTEMS......... OK",
+            "success"
+        );
 
-    await printBootMessage(
-        "CHECKING NETWORK INTEGRITY...... WARN",
-        "warning"
-    );
+        await printBootMessage(
+            "CHECKING NETWORK INTEGRITY...... WARN",
+            "warning"
+        );
 
-    await printBootMessage(
-        "REMOTE CONNECTION............... ESTABLISHED",
-        "success"
-    );
+        await printBootMessage(
+            "LOADING ARCHIVE INDEX........... OK",
+            "success"
+        );
 
-    await printBootMessage(
-        dividerLine, 
-        "dim"
-    );
+        await printBootMessage(
+            dividerLine, 
+            "dim"
+        );
+    }
 
     await printBootMessage(
         "INDEPENDENT ARCHIVE TERMINAL",
@@ -288,9 +292,4 @@ async function bootTerminal() {
 updateClock();
 setInterval(updateClock, 1000);
 
-if(currentNode === "N1"){
-    bootTerminal();
-} else {
-    commandInput.disabled = false;
-    commandInput.focus();
-}
+bootTerminal();
