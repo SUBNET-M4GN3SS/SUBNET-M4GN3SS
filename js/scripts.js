@@ -230,6 +230,16 @@ async function bootTerminal() {
     if(currentNode === "N1"){
 
         await printBootMessage(
+            "INITIALIZING",
+            "accent"
+        )
+
+        await printBootMessage(
+            dividerLine,
+            "dim"
+        )
+
+        await printBootMessage(
             "REMOTE CONNECTION............... ESTABLISHED",
             "success"
         );
@@ -255,10 +265,17 @@ async function bootTerminal() {
 
     terminalOutput.replaceChildren();
 
-    await printBootMessage(
-        "INDEPENDENT ARCHIVE TERMINAL",
-        "accent"
-    );
+    if(currentNode === "N1"){        
+        await printBootMessage(
+            "PRIMARY SUBNET NODE",
+            "accent"
+        );
+    } else {
+        await printBootMessage(
+            "DATA NODE ",
+            "accent"
+        );
+    }
 
     await printBootMessage(
         dividerLine, 
