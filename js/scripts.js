@@ -20,6 +20,14 @@ const  commandAndDescriptionDict = {
     "Download": "Download a file"
 };
 
+const terminalMessages = {
+    noNodesMsg: "No node connections found",
+    invalidDestinationMsg: "Invalid destination"
+};
+
+const noNodesMsg = terminalMessages.noNodesMsg;
+const invalidDestinationMsg = terminalMessages.invalidDestinationMsg;
+
 const node1 = new Node("N1", "index.html", "active", ["N2", "N3"], []);
 const node2= new Node("N2", "nodes/node2.html", "active", ["N1", "N4"], []);
 const node3 = new Node("N3", "nodes/node3.html", "active", ["N1"], []);
@@ -32,7 +40,11 @@ const nodes = {
     "N4": node4
 };
 
-let currentNode = "N1";
+const currentPage = window.location.pathname;
+
+const currentNode = Object.keys(nodes).find(
+    node => nodes[node].page.endsWith(currentPage.split("/").pop())
+);
 
 commandForm.addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -51,8 +63,15 @@ commandForm.addEventListener("submit", async function(event) {
         case "help":
             terminalOutput.replaceChildren();
 
-            await printBootMessage("AVAILABLE COMMANDS", "accent");
-            await printBootMessage(dividerLine,"dim");
+            await printBootMessage(
+                "AVAILABLE COMMANDS", 
+                "accent"
+            );
+
+            await printBootMessage(
+                dividerLine,
+                "dim"
+            );
 
             for(const [key, value] of Object.entries(commandAndDescriptionDict)){
                 var commandsAndDescriptionText = `${key}: ${value}`;
@@ -60,24 +79,47 @@ commandForm.addEventListener("submit", async function(event) {
                 await printBootMessage(commandsAndDescriptionText);
             };
 
-            await printBootMessage(dividerLine, "dim");
+            await printBootMessage(
+                dividerLine, 
+                "dim"
+            );
 
             break;
 
         case "nodes":;
             if(connections.length > 0){
                 terminalOutput.replaceChildren();
-                await printBootMessage("Connected Nodes", "accent");
-                await printBootMessage(dividerLine, "dim");
+
+                await printBootMessage(
+                    "Connected Nodes", 
+                    "accent"
+                );
+
+                await printBootMessage(
+                    dividerLine, 
+                    "dim"
+                );
 
                 for(const node of connections)
-                    await printBootMessage(`> ${node}`, "warning");
+                    await printBootMessage(
+                        `> ${node}`, 
+                        "warning"
+                    );
 
-                await printBootMessage(dividerLine, "dim");
-                await printBootMessage("TYPE 'navigate' AND A NODE NUMBER TO CONNECT TO  A  NODE", "dim");
+                await printBootMessage(
+                    dividerLine, 
+                    "dim"
+                );
+                await printBootMessage(
+                    "TYPE 'navigate' AND A NODE NUMBER TO CONNECT TO  A  NODE", 
+                    "dim"
+                );
 
             } else {
-                await printBootMessage("No node connections found", "warning");
+                await printBootMessage(
+                    noNodesMsg, 
+                    "warning"
+                );
             }
 
             break;
@@ -85,21 +127,30 @@ commandForm.addEventListener("submit", async function(event) {
         case "navigate":
             //Check connectivity
             if(!connections.includes(argument)){
-                await printBootMessage("Invalid destination", "warning");
+                await printBootMessage(
+                    invalidDestinationMsg, 
+                    "warning"
+                );
                 return;
             }
 
             const target_node = nodes[argument];
 
             if(!target_node){
-                await printBootMessage("Invalid destination", "warning");
+                await printBootMessage(
+                    invalidDestinationMsg, 
+                    "warning"
+                );
                 return;
             }
 
             if(target_node.status === "active"){
                 navigateToNode(target_node);
             } else {
-                await printBootMessage("No node connections found", "warning");
+                await printBootMessage(
+                    noNodesMsg, 
+                    "warning"
+                );
                 return;
             }
             break;
@@ -114,7 +165,10 @@ commandForm.addEventListener("submit", async function(event) {
 
         default:
             //Handle invalid commands
-            await printBootMessage("ERROR: UNKNOWN COMMAND", "error");
+            await printBootMessage(
+                "ERROR: UNKNOWN COMMAND", 
+                "error"
+            );
             break;
     };
 
@@ -168,11 +222,14 @@ async function bootTerminal() {
     accessStatus.textContent = "BOOT SEQUENCE";
 
     await printBootMessage(
-        "SUBNET M4GN3SS // NODE 001",
+        `SUBNET M4GN3SS // NODE ${currentNode.slice(1).padStart(3, "0")}`,
         "accent"
     );
 
-    await printBootMessage(dividerLine, "dim");
+    await printBootMessage(
+        dividerLine, 
+        "dim"
+    );
 
     await printBootMessage(
         "POWERING SYSTEM................. OK",
@@ -199,14 +256,20 @@ async function bootTerminal() {
         "success"
     );
 
-    await printBootMessage(dividerLine, "dim");
+    await printBootMessage(
+        dividerLine, 
+        "dim"
+    );
 
     await printBootMessage(
         "INDEPENDENT ARCHIVE TERMINAL",
         "accent"
     );
 
-    await printBootMessage(dividerLine, "dim");
+    await printBootMessage(
+        dividerLine, 
+        "dim"
+    );
 
     await printBootMessage(
         "TYPE 'nodes' TO IDENTIFY CONNECTED NODES OR 'help' FOR A LIST OF COMMANDS",
@@ -225,4 +288,9 @@ async function bootTerminal() {
 updateClock();
 setInterval(updateClock, 1000);
 
-bootTerminal();
+if(currentNode === "N1"){
+    bootTerminal();
+} else {
+    commandInput.disabled = false;
+    commandInput.focus();
+}

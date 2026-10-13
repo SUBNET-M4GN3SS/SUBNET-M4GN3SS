@@ -3,12 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SUBNET M4GN3SS // NODE 002</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>SUBNET M4GN3SS // NODE 002</h1>
+    <meta name="theme-color" content="#0D0D0F">
+    <meta name="description" content="SUBNET M4GN3SS — Independent network node for fiction, interactive software, and transmissions.">
 
-    <p>Node connection established.</p>
+    <title>SUBNET M4GN3SS // NODE 002</title>
+
+    <link rel="stylesheet" href="../styles.css">
+    <script type="module" src="../js/scripts.js"></script>
+</head>
+
+<body>
+    <main class="terminal">
+
+        <header class="terminal-header">
+            <div class="brand">
+                <span class="brand-symbol" aria-hidden="true">▣</span>
+                <span>SUBNET</span>
+                <span class="accent">M4GN3SS</span>
+            </div>
+
+            <div class="system-status">
+                <span class="status-light" aria-hidden="true"></span>
+                <span id="node-status">NODE ONLINE</span>
+            </div>
+        </header>
+
+        <section class="system-bar" aria-label="System information">
+            <span>SYS://SUBNET-M4GN3SS</span>
+            <span id="clock">00:00:00</span>
+            <span id="access-status">ACCESS: OPEN</span>
+        </section>
+
+        <div aria-hidden="true"></div>
+
+        <section
+            class="terminal-output"
+            id="terminal-output"
+            aria-label="Terminal output"
+            aria-live="polite"
+            aria-relevant="additions"
+        >
+            <p class="accent">SUBNET M4GN3SS // NODE 002</p>
+            <p class="accent">REMOTE ARCHIVE TERMINAL</p>
+            <br>
+            <p class="success">CONNECTION ESTABLISHED.</p>
+            <br>
+            <p>Remote network node is operational.</p>
+            <br>
+        </section>
+
+        <form
+            class="command-line"
+            id="command-form"
+            autocomplete="off"
+        >
+            <label class="prompt" id="prompt" for="command-input">guest@subnet:~$</label>
+
+            <input
+                type="text"
+                id="command-input"
+                name="command"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                autofocus
+                aria-label="Enter a terminal command"
+            >
+        </form>
+
+        <footer class="terminal-footer">
+            <span>NODE: SM-002</span>
+            <span>SECURITY: UNVERIFIED</span>
+            <span>© SUBNET M4GN3SS</span>
+        </footer>
+
+    </main>
 </body>
 </html>
