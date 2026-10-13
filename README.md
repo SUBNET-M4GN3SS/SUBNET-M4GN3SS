@@ -1,4 +1,4 @@
-# SUBNET M4GN3SS
+# SUBNET-M4GN3SS
 
 **An interactive terminal experience.**
 
