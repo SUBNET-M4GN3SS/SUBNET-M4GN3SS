@@ -1,6 +1,6 @@
 # SUBNET-M4GN3SS
 
-**An interactive terminal experience.**
+**An interactive terminal ARG.**
 
 SUBNET-M4GN3SS is a browser-based interactive fiction project built around a fictional network of interconnected nodes, archived files, and mysterious transmissions.
 
