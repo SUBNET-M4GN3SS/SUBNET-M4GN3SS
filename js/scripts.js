@@ -203,7 +203,7 @@ async function printBootMessage(message, type = "") {
     // Keep the latest output visible
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
 
-    await wait(450);
+    await wait(600);
 }
 
 // Update the system clock
@@ -227,16 +227,6 @@ async function bootTerminal() {
     nodeStatus.textContent = "INITIALIZING";
     accessStatus.textContent = "BOOT SEQUENCE";
 
-    await printBootMessage(
-        `SUBNET M4GN3SS // NODE ${currentNode.slice(1).padStart(3, "0")}`,
-        "accent"
-    );
-
-    await printBootMessage(
-        dividerLine, 
-        "dim"
-    );
-
     if(currentNode === "N1"){
 
         await printBootMessage(
@@ -259,11 +249,11 @@ async function bootTerminal() {
             "success"
         );
 
-        await printBootMessage(
-            dividerLine, 
-            "dim"
-        );
+        await wait(1500);
+
     }
+
+    terminalOutput.replaceChildren();
 
     await printBootMessage(
         "INDEPENDENT ARCHIVE TERMINAL",
