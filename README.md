@@ -2,7 +2,7 @@
 
 **An interactive terminal experience.**
 
-SUBNET M4GN3SS is a browser-based interactive fiction project built around a fictional network of interconnected nodes, archived files, and mysterious transmissions.
+SUBNET-M4GN3SS is a browser-based interactive fiction project built around a fictional network of interconnected nodes, archived files, and mysterious transmissions.
 
 Explore the network, navigate between nodes, and uncover what lies buried within the subnet.
 
